@@ -91,7 +91,7 @@ export const experience = [
   {
     role: { pt: 'Analista de PCM', en: 'Maintenance Planning (PCM) Analyst' },
     company: 'Aerocris',
-    period: { pt: 'Jun/2026 – Atual', en: 'Jun 2026 – Present' },
+    period: { pt: 'Jun/2026 a Atual', en: 'Jun 2026 to Present' },
     current: true,
     bullets: {
       pt: ['Planejamento e controle de manutenção corretiva, preventiva e preditiva de ~45 equipamentos (tornos CNC, centros de usinagem, compressores) em fornecedora aeronáutica AS9100 Rev D', 'Projetou e desenvolveu o sistema de PCM/CMMS usado pela empresa, do banco de dados à interface', 'Gestão de indicadores (MTTR, MTBF, disponibilidade técnica, backlog) e relatórios gerenciais automatizados', 'Conformidade NR13 (vasos de pressão), controle de fluido de corte e gestão de resíduos industriais'],
@@ -101,7 +101,7 @@ export const experience = [
   {
     role: { pt: 'Assistente Comercial', en: 'Commercial Assistant' },
     company: 'VIEMAQ',
-    period: { pt: 'Nov/2025 – Abr/2026', en: 'Nov 2025 – Apr 2026' },
+    period: { pt: 'Nov/2025 a Abr/2026', en: 'Nov 2025 to Apr 2026' },
     bullets: {
       pt: ['Elaboração e gestão de orçamentos técnicos e comerciais', 'Atendimento ao cliente e suporte consultivo na jornada de compra', 'Pós-vendas com acompanhamento de pedidos e resolução de demandas'],
       en: ['Preparation and management of technical and commercial quotes', 'Customer service and consultative support along the buying journey', 'After-sales with order tracking and issue resolution'],
@@ -110,7 +110,7 @@ export const experience = [
   {
     role: { pt: 'Manutenção e Planejamento (PCM)', en: 'Maintenance & Planning (PCM)' },
     company: 'Macromaq',
-    period: { pt: 'Dez/2024 – Out/2025', en: 'Dec 2024 – Oct 2025' },
+    period: { pt: 'Dez/2024 a Out/2025', en: 'Dec 2024 to Oct 2025' },
     bullets: {
       pt: ['Análise de custos e indicadores de manutenção (MTTR/MTBF, disponibilidade) com apoio de programação', 'Desenvolvimento de melhorias tecnológicas e automação de planejamento (PCM)', 'Acompanhamento de indicadores e apoio às rotinas de manutenção'],
       en: ['Cost and maintenance-metric analysis (MTTR/MTBF, availability) supported by programming', 'Development of technological improvements and maintenance-planning automation (PCM)', 'Monitoring of indicators and support to maintenance routines'],
@@ -119,7 +119,7 @@ export const experience = [
   {
     role: { pt: 'Analista Administrativo', en: 'Administrative Analyst' },
     company: 'Macromaq',
-    period: { pt: 'Set/2024 – Dez/2024', en: 'Sep 2024 – Dec 2024' },
+    period: { pt: 'Set/2024 a Dez/2024', en: 'Sep 2024 to Dec 2024' },
     bullets: {
       pt: ['Programação e controle de manutenções preventivas', 'Apoio ao desenvolvimento de scripts de automação para relatórios', 'Controle de custos e suporte direto à gestão'],
       en: ['Scheduling and control of preventive maintenance', 'Support in developing automation scripts for reports', 'Cost control and direct support to management'],
@@ -128,7 +128,7 @@ export const experience = [
   {
     role: { pt: 'Assistente Administrativo', en: 'Administrative Assistant' },
     company: 'Macromaq',
-    period: { pt: 'Nov/2022 – Set/2024', en: 'Nov 2022 – Sep 2024' },
+    period: { pt: 'Nov/2022 a Set/2024', en: 'Nov 2022 to Sep 2024' },
     bullets: {
       pt: ['Gestão de documentos, ordens de manutenção e contratos', 'Criação de planilhas dinâmicas e dashboards em Google Sheets', 'Lançamento e análise de dados operacionais'],
       en: ['Management of documents, maintenance orders and contracts', 'Creation of dynamic spreadsheets and dashboards in Google Sheets', 'Entry and analysis of operational data'],
@@ -143,7 +143,7 @@ export const education = [
   {
     institution: 'SENAC',
     course: { pt: 'Tecnologia em Segurança Cibernética', en: 'Cybersecurity Technology (Associate)' },
-    period: { pt: '2025 – 2028 (em andamento)', en: '2025 – 2028 (in progress)' },
+    period: { pt: '2025 a 2028 (em andamento)', en: '2025 a 2028 (in progress)' },
     detail: {
       pt: 'Graduação tecnológica com foco em segurança e auditoria de sistemas, criptografia, controle de acessos, redes, DevSecOps e governança de T.I. TCC: CyberLab, plataforma de treino ofensivo mapeada ao MITRE ATT&CK.',
       en: 'Technology degree focused on system security and auditing, cryptography, access control, networks, DevSecOps and IT governance. Capstone: CyberLab, an offensive-training platform mapped to MITRE ATT&CK.',
@@ -152,7 +152,7 @@ export const education = [
   {
     institution: 'UniSociesc',
     course: { pt: 'Análise e Desenvolvimento de Sistemas', en: 'Systems Analysis & Development' },
-    period: { pt: '2023 – 2024 (trancado)', en: '2023 – 2024 (paused)' },
+    period: { pt: '2023 a 2024 (trancado)', en: '2023 a 2024 (paused)' },
     detail: {
       pt: 'Graduação tecnológica em desenvolvimento de sistemas, base em lógica, programação, bancos de dados e engenharia de software.',
       en: 'Technology degree in systems development, foundations in logic, programming, databases and software engineering.',
@@ -161,7 +161,7 @@ export const education = [
   {
     institution: 'SENAC',
     course: { pt: 'Técnico em Informática', en: 'Technical Diploma in IT' },
-    period: { pt: '2018 – 2020', en: '2018 – 2020' },
+    period: { pt: '2018 a 2020', en: '2018 a 2020' },
     detail: {
       pt: 'Formação técnica em informática, fundamentos de hardware, redes, sistemas operacionais e programação.',
       en: 'Technical training in IT, fundamentals of hardware, networking, operating systems and programming.',
