@@ -1,36 +1,6 @@
-import { profile, stack, competencies, education, experience } from '../data/content'
+import { profile, stack, competencies, education } from '../data/content'
 import { useT } from '../i18n'
 import { Reveal, SectionHead } from './ui'
-
-export function Experience() {
-  const { t, L } = useT()
-  return (
-    <section className="section" id="experiencia">
-      <div className="container">
-        <SectionHead eyebrow={t.work.eyebrow} title={t.work.title} />
-        <div className="exp-list">
-          {experience.map((e) => (
-            <Reveal as="article" className="exp-item" key={L(e.role) + e.company}>
-              <div className="exp-side">
-                <span className={`exp-dot ${e.current ? 'is-current' : ''}`} aria-hidden="true" />
-                <span className="exp-period">{L(e.period)}</span>
-              </div>
-              <div className="exp-body">
-                <h3>{L(e.role)}</h3>
-                <div className="exp-company">{e.company}</div>
-                <ul>
-                  {L(e.bullets).map((b, i) => (
-                    <li key={i}>{b}</li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 export function About() {
   const { t, L } = useT()
@@ -148,7 +118,7 @@ export function Contact() {
 
       <footer className="site-footer">
         <div className="container">
-          <p>© {new Date().getFullYear()} {profile.name} Barros</p>
+          <p>© {new Date().getFullYear()} {profile.name}</p>
           <p>{t.footer}</p>
         </div>
       </footer>

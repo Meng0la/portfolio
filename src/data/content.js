@@ -30,7 +30,6 @@ export const profile = {
 export const ui = {
   pt: {
     nav: { about: 'Sobre', experience: 'Experiência', tech: 'Tecnologias', highlights: 'Destaques', projects: 'Projetos', education: 'Formação', contact: 'Contato' },
-    work: { eyebrow: 'Experiência profissional', title: 'Trajetória em manutenção, operações e tecnologia.', current: 'Atual' },
     hero: {
       badge: 'Manutenção Industrial · Segurança · Automação',
       title: 'Software que conecta operação, dados e segurança.',
@@ -57,7 +56,6 @@ export const ui = {
   },
   en: {
     nav: { about: 'About', experience: 'Experience', tech: 'Technologies', highlights: 'Highlights', projects: 'Projects', education: 'Education', contact: 'Contact' },
-    work: { eyebrow: 'Professional experience', title: 'A path across maintenance, operations and technology.', current: 'Present' },
     hero: {
       badge: 'Industrial Maintenance · Security · Automation',
       title: 'Software that connects operations, data and security.',

@@ -1,7 +1,7 @@
 import { LangProvider } from './i18n'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
-import { About, Experience, Stack, Competencies, Education, Contact } from './components/Sections'
+import { About, Stack, Competencies, Education, Contact } from './components/Sections'
 import { Featured, AllProjects, ProjectsProvider } from './components/Projects'
 
 export default function App() {
@@ -12,7 +12,6 @@ export default function App() {
       <main id="conteudo">
         <Hero />
         <About />
-        <Experience />
         <Stack />
         <ProjectsProvider>
           {({ onOpen }) => (
