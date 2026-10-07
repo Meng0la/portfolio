@@ -29,7 +29,7 @@ export const profile = {
 // ---------------------------------------------------------------------------
 export const ui = {
   pt: {
-    nav: { about: 'Sobre', experience: 'Experiência', tech: 'Tecnologias', highlights: 'Destaques', projects: 'Projetos', education: 'Formação', contact: 'Contato' },
+    nav: { about: 'Sobre', experience: 'Competências', tech: 'Tecnologias', highlights: 'Destaques', projects: 'Projetos', case: 'Estudo de caso', education: 'Formação', contact: 'Contato' },
     hero: {
       badge: 'Manutenção Industrial · Segurança · Automação',
       title: 'Software que conecta operação, dados e segurança.',
@@ -55,7 +55,7 @@ export const ui = {
     footer: 'Projetado com foco em clareza, evidência e privacidade.',
   },
   en: {
-    nav: { about: 'About', experience: 'Experience', tech: 'Technologies', highlights: 'Highlights', projects: 'Projects', education: 'Education', contact: 'Contact' },
+    nav: { about: 'About', experience: 'Skills', tech: 'Technologies', highlights: 'Highlights', projects: 'Projects', case: 'Case study', education: 'Education', contact: 'Contact' },
     hero: {
       badge: 'Industrial Maintenance · Security · Automation',
       title: 'Software that connects operations, data and security.',
@@ -82,6 +82,119 @@ export const ui = {
   },
 }
 
+// ---------------------------------------------------------------------------
+//  ESTUDO DE CASO: análise passiva de uma campanha de phishing
+//  Regras de publicação: sem nomes, documentos, domínios ou códigos de
+//  pagamento; prints com dados pessoais cobertos.
+// ---------------------------------------------------------------------------
+export const caseStudy = {
+  eyebrow: { pt: 'Estudo de caso', en: 'Case study' },
+  title: { pt: 'Análise passiva de uma campanha de phishing', en: 'Passive analysis of a phishing campaign' },
+  sub: {
+    pt: 'Uma mensagem de WhatsApp que imitava o DETRAN virou um exercício de inteligência de ameaças, feito só com fontes públicas.',
+    en: 'A WhatsApp message impersonating DETRAN, the Brazilian traffic authority, became a threat-intelligence exercise done with public sources only.',
+  },
+  contextTitle: { pt: 'Contexto', en: 'Context' },
+  context: {
+    pt: 'Recebi no WhatsApp uma mensagem que se passava pelo DETRAN, avisando de supostos encargos na CNH. Em vez de apenas apagar, tratei como exercício de inteligência de ameaças, usando somente fontes públicas e sem interagir de forma intrusiva com a infraestrutura do golpista.',
+    en: 'I received a WhatsApp message posing as DETRAN, warning of alleged charges on my driver’s license (CNH). Instead of just deleting it, I treated it as a threat-intelligence exercise, using public sources only and without intrusive interaction with the scammer’s infrastructure.',
+  },
+  diagram: {
+    src: 'estudo-de-caso/01-anatomia.webp',
+    width: 1200,
+    height: 1430,
+    alt: {
+      pt: 'Diagrama com as seis etapas do golpe: isca, página falsa, cobrança 1, sucesso mais cobrança 2, sucesso mais cobrança 3 e falso recibo.',
+      en: 'Diagram of the six steps of the scam: lure, fake page, charge 1, success plus charge 2, success plus charge 3 and fake receipt.',
+    },
+    caption: {
+      pt: 'Anatomia do golpe: três cobranças em sequência, em que cada "sucesso" apresenta a próxima.',
+      en: 'Anatomy of the scam: three charges in sequence, where each "success" presents the next one.',
+    },
+  },
+  analyzedTitle: { pt: 'O que analisei', en: 'What I analyzed' },
+  analyzed: {
+    pt: [
+      'Cadeia de redirecionamento entre três domínios registrados com poucas horas ou dias de diferença, no mesmo registrador, atrás de proxy reverso.',
+      'Técnicas de evasão: o site mostra uma página de "fora do ar" a scanners e navegadores automatizados.',
+      'Estrutura do golpe: três cobranças PIX em sequência, em que cada "sucesso" apresenta a próxima cobrança.',
+      'Rastreamento financeiro: leitura do código PIX (formato EMV/BR Code, checagem CRC16) até o recebedor e a instituição de pagamento, com validação de CNPJ em cadastros públicos.',
+      'Sinais de empresa de fachada: empresa recém-aberta, atividade incompatível e endereço residencial.',
+    ],
+    en: [
+      'Redirect chain across three domains registered hours or days apart, at the same registrar, behind a reverse proxy.',
+      'Evasion techniques: the site shows an "offline" page to scanners and automated browsers.',
+      'Structure of the scam: three PIX charges in sequence, where each "success" presents the next charge.',
+      'Financial tracing: reading the PIX code (EMV/BR Code format, CRC16 check) down to the recipient and the payment institution, with CNPJ validation in public registries.',
+      'Shell-company signals: newly opened company, incompatible activity and a residential address.',
+    ],
+  },
+  toolsTitle: { pt: 'Ferramentas e técnicas', en: 'Tools and techniques' },
+  tools: [
+    'Certificate Transparency (crt.sh)',
+    'WHOIS',
+    { pt: 'DNS por resolver público', en: 'DNS via public resolver' },
+    { pt: 'Análise estática de JavaScript minificado (sem executar)', en: 'Static analysis of minified JavaScript (not executed)' },
+    { pt: 'Decodificação de BR Code', en: 'BR Code decoding' },
+    { pt: 'Validação de dígitos verificadores de CNPJ', en: 'CNPJ check-digit validation' },
+  ],
+  evidenceTitle: { pt: 'Evidências, com dados pessoais cobertos', en: 'Evidence, with personal data covered' },
+  evidenceHint: { pt: 'Toque em uma imagem para ampliar.', en: 'Tap an image to enlarge.' },
+  shots: [
+    {
+      src: 'estudo-de-caso/02-pagina-falsa.webp', width: 1400, height: 810,
+      title: { pt: 'Página falsa', en: 'Fake page' },
+      alt: { pt: 'Tela de consulta que imita um portal oficial de trânsito e pede o CPF.', en: 'Lookup screen imitating an official traffic portal and asking for the CPF.' },
+      caption: { pt: 'Imita o portal oficial e pede o CPF para parecer uma consulta legítima.', en: 'Imitates the official portal and asks for the CPF to look like a legitimate lookup.' },
+    },
+    {
+      src: 'estudo-de-caso/03-dados-pendencia.webp', width: 1400, height: 830,
+      title: { pt: 'Dados reais e ameaça', en: 'Real data and threat' },
+      alt: { pt: 'Tela com dados cadastrais cobertos e aviso de pendência com risco de suspensão da CNH.', en: 'Screen with covered personal data and a pending-issue notice warning of license suspension.' },
+      caption: { pt: 'Exibe dados reais da vítima (cobertos aqui) e ameaça com suspensão da CNH.', en: 'Shows the victim’s real data (covered here) and threatens license suspension.' },
+    },
+    {
+      src: 'estudo-de-caso/04-guia-pagamento.webp', width: 1290, height: 824,
+      title: { pt: 'Primeira cobrança', en: 'First charge' },
+      alt: { pt: 'Guia de pagamento com valor, vencimento no mesmo dia e lista de penalidades.', en: 'Payment slip with amount, same-day due date and a list of penalties.' },
+      caption: { pt: 'Guia com vencimento no mesmo dia e lista de penalidades: pressão de urgência.', en: 'Slip due the same day, with a list of penalties: urgency pressure.' },
+    },
+    {
+      src: 'estudo-de-caso/05-pagamento-confirmado.webp', width: 1400, height: 703,
+      title: { pt: '"Sucesso" e segunda cobrança', en: '"Success" and second charge' },
+      alt: { pt: 'Tela de pagamento confirmado que já oferece a renovação da CNH com cronômetro.', en: 'Payment confirmed screen that already offers a license renewal with a countdown.' },
+      caption: { pt: 'A tela de pagamento confirmado já traz a próxima cobrança, a "renovação da CNH", com cronômetro.', en: 'The payment confirmed screen already presents the next charge, a "license renewal", with a countdown.' },
+    },
+    {
+      src: 'estudo-de-caso/06-cobranca-pix.webp', width: 1066, height: 807,
+      title: { pt: 'Cobrança via PIX', en: 'PIX charge' },
+      alt: { pt: 'Tela de cobrança PIX com QR Code e código cobertos, instruções e contagem regressiva.', en: 'PIX charge screen with covered QR code and payment string, instructions and a countdown.' },
+      caption: { pt: 'Cobrança via PIX com contagem regressiva. QR Code e código de pagamento foram cobertos.', en: 'PIX charge with a countdown. QR code and payment string were covered.' },
+    },
+  ],
+  resultTitle: { pt: 'Resultado', en: 'Outcome' },
+  result: {
+    pt: 'Denúncias encaminhadas a Google Safe Browsing, Cloudflare, registrador e hospedagem, além de relatório técnico. Mantive limites éticos: não explorei falhas, não consultei dados de terceiros e cobri dados pessoais nos materiais.',
+    en: 'Reports sent to Google Safe Browsing, Cloudflare, the registrar and the host, plus a technical report. I kept ethical limits: I did not exploit flaws, did not query third-party data and covered personal data in the materials.',
+  },
+  learnedTitle: { pt: 'O que aprendi', en: 'What I learned' },
+  learned: {
+    pt: [
+      'OSINT passivo já entrega muito: infraestrutura, linha do tempo e fluxo financeiro.',
+      'Saber onde parar é parte do trabalho. Achar uma falha não autoriza explorá-la.',
+      'Vale separar fato observado de inferência, e corrigir o próprio erro de análise quando aparece.',
+    ],
+    en: [
+      'Passive OSINT already delivers a lot: infrastructure, timeline and money flow.',
+      'Knowing where to stop is part of the job. Finding a flaw does not authorize exploiting it.',
+      'It pays to separate observed fact from inference, and to correct your own analysis mistakes when they show up.',
+    ],
+  },
+  note: {
+    pt: 'Análise passiva, só fontes públicas. Nomes, documentos, domínios e códigos de pagamento foram omitidos de propósito.',
+    en: 'Passive analysis, public sources only. Names, documents, domains and payment codes were deliberately omitted.',
+  },
+}
 
 // ---------------------------------------------------------------------------
 //  FORMAÇÃO ACADÊMICA

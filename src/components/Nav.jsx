@@ -13,6 +13,7 @@ export default function Nav() {
     { href: '#tecnologias', label: t.nav.tech },
     { href: '#destaques', label: t.nav.highlights },
     { href: '#projetos', label: t.nav.projects },
+    { href: '#estudo-de-caso', label: t.nav.case },
     { href: '#competencias', label: t.nav.experience },
     { href: '#formacao', label: t.nav.education },
   ]

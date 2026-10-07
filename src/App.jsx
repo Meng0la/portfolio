@@ -3,6 +3,7 @@ import Nav from './components/Nav'
 import Hero from './components/Hero'
 import { About, Stack, Competencies, Education, Contact } from './components/Sections'
 import { Featured, AllProjects, ProjectsProvider } from './components/Projects'
+import CaseStudy from './components/CaseStudy'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             </>
           )}
         </ProjectsProvider>
+        <CaseStudy />
         <Competencies />
         <Education />
         <Contact />
