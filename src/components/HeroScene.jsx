@@ -26,8 +26,8 @@ export default function HeroScene() {
       <div className="scene-grid" aria-hidden="true" />
       <div className="scene-coordinates" aria-hidden="true"><span>GM / CYBER CORE</span><span>WEBGL / 3D</span></div>
       <div className="sculpture-canvas" ref={host} />
-      {fallback&&<div className="sculpture-fallback" aria-hidden="true"><div className="fallback-sphere"/><svg viewBox="0 0 260 180"><path d="M92 180 94 133C57 114 31 99 26 88c-4-11 8-16 18-9l53 24-30-69c-5-13 9-20 17-6l31 51-10-61c-2-16 15-19 19-3l17 65 8-56c2-16 20-14 19 1l-5 62 14-36c6-15 22-9 17 5l-21 74-12 50Z"/></svg></div>}
-      <p className="sr-only">{pt?'Esfera cyber tridimensional girando sobre uma mão robótica articulada e animada.':'A three-dimensional cyber sphere rotating above an animated articulated robotic hand.'}</p>
+      {fallback&&<div className="sculpture-fallback" aria-hidden="true"><div className="fallback-sphere"/><img src={`${import.meta.env.BASE_URL}assets/cyber-hand-realistic.webp`} alt="" /></div>}
+      <p className="sr-only">{pt?'Esfera cyber tridimensional girando sobre uma mão anatômica holográfica em concha, sustentando o globo.':'A three-dimensional cyber sphere rotating above an animated anatomical holographic hand cradling the globe.'}</p>
       <div className="scene-bottom"><span>{pt?'Mova o cursor para explorar':'Move your cursor to explore'}</span><button type="button" disabled={!!reduced} aria-pressed={paused||!!reduced} onClick={()=>setPaused(!paused)}>
         {paused||reduced?<Play size={13}/>:<Pause size={13}/>}{reduced?(pt?'Movimento reduzido':'Reduced motion'):paused?(pt?'Retomar':'Resume'):(pt?'Pausar':'Pause')}
       </button></div>

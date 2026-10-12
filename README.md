@@ -5,7 +5,7 @@ Portfólio bilíngue (PT/EN) que apresenta projetos de manutenção industrial, 
 ## Visual e interação
 
 - Tema escuro com azul e violeta, tipografia DM Sans e IBM Plex Mono.
-- Esfera cyber 3D em WebGL sobre uma mão robótica articulada, com rotação e resposta ao cursor.
+- Esfera cyber 3D em WebGL sobre uma mão anatômica holográfica em concha, com rotação e resposta ao cursor.
 - Controle de pausa e suporte a `prefers-reduced-motion`, inclusive nas transições Framer Motion.
 - Layout responsivo, navegação PT/EN e diálogos com foco contido e restauração ao fechar.
 - Contatos por LinkedIn, GitHub e e-mail. Telefone e link pessoal de WhatsApp removidos da versão atual.
@@ -29,7 +29,7 @@ Stack: React 19, Vite 6, Tailwind CSS 4, Framer Motion e lucide-react. A cena us
 - `src/data/content.js`: perfil, projetos, competências, formação e textos PT/EN.
 - `src/components/Hero.jsx`: apresentação e contagens derivadas dos projetos.
 - `src/components/HeroScene.jsx`: controles de movimento e carregamento da cena.
-- `src/components/CyberSculpture.js`: esfera e mão robótica 3D procedural.
+- `src/components/CyberSculpture.js`: globo 3D e mão anatômica com textura de alta qualidade.
 - `src/components/Projects.jsx`: destaques, busca, filtros e detalhes.
 - `src/index.css`: estilos estruturais.
 - `src/redesign.css`: identidade visual e estilos 3D.
