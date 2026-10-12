@@ -1,6 +1,7 @@
+import handImage from '../assets/cyber-hand-realistic.webp'
 import * as THREE from 'three'
 
-export function createCyberSculpture(host, controls, onFallback) {
+export function createCyberSculpture(host, controls, onFallback, onReady) {
   let renderer
   try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'low-power' }) }
   catch { onFallback(); return () => {} }
@@ -39,9 +40,9 @@ export function createCyberSculpture(host, controls, onFallback) {
   const handMaterial = new THREE.MeshBasicMaterial({ transparent:true, depthWrite:false, side:THREE.DoubleSide, toneMapped:false })
   const handPlane=mesh(hand,new THREE.PlaneGeometry(2.75,1.72),handMaterial,[0,0,0])
   handPlane.visible=false
-  new THREE.TextureLoader().load(`${import.meta.env.BASE_URL}assets/cyber-hand-realistic.webp`,texture=>{
+  new THREE.TextureLoader().load(handImage,texture=>{
     if(!alive){texture.dispose();return}
-    texture.colorSpace=THREE.SRGBColorSpace;handTexture=texture;handMaterial.map=texture;handMaterial.needsUpdate=true;handPlane.visible=true
+    texture.colorSpace=THREE.SRGBColorSpace;handTexture=texture;handMaterial.map=texture;handMaterial.needsUpdate=true;handPlane.visible=true;onReady?.()
   },undefined,()=>{if(alive)onFallback()})
   const motes=new THREE.Group();root.add(motes)
   for(let i=0;i<18;i++){const p=mesh(motes,new THREE.SphereGeometry(.008,6,4),i%2?neon:violet,[(Math.sin(i*8.1))*1.5,Math.cos(i*2.3)*1.5,Math.sin(i*3)*.9]);p.userData.baseY=p.position.y}
