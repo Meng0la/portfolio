@@ -100,9 +100,7 @@ export function Contact() {
             <a className="button button-primary" href={profile.linkedin} target="_blank" rel="noreferrer">
               LinkedIn
             </a>
-            <a className="button button-ghost" href={`https://wa.me/${profile.phoneHref.replace(/\D/g, '')}`} target="_blank" rel="noreferrer">
-              WhatsApp
-            </a>
+
             <a className="button button-ghost" href={profile.github} target="_blank" rel="noreferrer">
               GitHub
             </a>
@@ -111,7 +109,7 @@ export function Contact() {
             </a>
           </div>
           <p className="contact-info">
-            {L(profile.location)} · {profile.phone} · {profile.email}
+            {L(profile.location)} · {profile.email}
           </p>
         </Reveal>
       </section>

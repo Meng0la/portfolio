@@ -307,3 +307,5 @@ button { font-family: inherit; cursor: pointer; }
   .carousel-card { flex-basis: 88%; padding: 32px; min-height: 440px; }
   .site-footer .container { flex-direction: column; }
 }
+
+@import './redesign.css';

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import useDialogFocus from '../hooks/useDialogFocus'
+import { useCallback, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { caseStudy as cs } from '../data/content'
 import { useT } from '../i18n'
@@ -7,19 +8,13 @@ import { Reveal, SectionHead } from './ui'
 function Lightbox({ shot, onClose }) {
   const { L } = useT()
 
-  useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && onClose()
-    document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [onClose])
+  const dialog = useRef(null)
+  useDialogFocus(dialog, onClose)
 
   return (
     <motion.div
       className="lightbox"
+      ref={dialog}
       role="dialog"
       aria-modal="true"
       aria-label={L(shot.title)}
@@ -40,6 +35,7 @@ function Lightbox({ shot, onClose }) {
 export default function CaseStudy() {
   const { L } = useT()
   const [open, setOpen] = useState(null)
+  const close = useCallback(() => setOpen(null), [])
 
   return (
     <section className="section section-dark" id="estudo-de-caso">
@@ -125,7 +121,7 @@ export default function CaseStudy() {
       </div>
 
       <AnimatePresence>
-        {open && <Lightbox shot={open} onClose={() => setOpen(null)} />}
+        {open && <Lightbox shot={open} onClose={close} />}
       </AnimatePresence>
     </section>
   )

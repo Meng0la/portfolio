@@ -1,8 +1,16 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { Search, Database, ShieldCheck, Workflow, Code2 } from 'lucide-react'
+import useDialogFocus from '../hooks/useDialogFocus'
+import { useCallback, useMemo, useRef, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { projects, categoryFilters, filterTabs } from '../data/content'
 import { useT } from '../i18n'
 import { Reveal, SectionHead, StatusPill } from './ui'
+
+
+function ProjectArt({ category }) {
+  const Icon = category === 'Cibersegurança' ? ShieldCheck : category === 'Automação' ? Workflow : Database
+  return <div className="project-art" aria-hidden="true"><span className="art-node small"><Code2 size={17} /></span><span className="art-line" /><span className="art-node"><Icon size={27} /></span><span className="art-line" /><span className="art-node small"><Workflow size={17} /></span></div>
+}
 
 function initials(name) {
   const words = name.replace(/[()]/g, '').split(/\s+/).filter(Boolean)
@@ -14,20 +22,17 @@ function initials(name) {
 function ProjectModal({ p, onClose }) {
   const { t, L } = useT()
 
-  useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && onClose()
-    document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [onClose])
+  const dialog = useRef(null)
+  useDialogFocus(dialog, onClose)
 
   return (
     <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
       <motion.div
         className="modal-card"
+        ref={dialog}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-title"
         initial={{ y: 60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 60, opacity: 0 }}
@@ -40,7 +45,7 @@ function ProjectModal({ p, onClose }) {
           <span>{p.category}</span>
           <StatusPill status={p.status} />
         </div>
-        <h3>{p.name}</h3>
+        <h3 id="project-title">{p.name}</h3>
         <p className="modal-lead">{L(p.short)}</p>
 
         <div className="modal-block">
@@ -104,13 +109,14 @@ export function Featured({ onOpen }) {
   const featured = projects.filter((p) => p.featured)
   const trackRef = useRef(null)
   const [index, setIndex] = useState(0)
+  const reduced = useReducedMotion()
 
   const scrollToCard = (i) => {
     const track = trackRef.current
     if (!track) return
     const clamped = Math.max(0, Math.min(i, featured.length - 1))
     const card = track.children[clamped]
-    if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' })
+    if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: reduced ? 'auto' : 'smooth' })
   }
 
   const onScroll = () => {
@@ -141,6 +147,7 @@ export function Featured({ onOpen }) {
                 className={`carousel-card ${i === 0 ? 'dark' : ''}`}
                 onClick={() => onOpen(p)}
               >
+                <ProjectArt category={p.category} />
                 <div className="card-meta">
                   <span>{p.category}</span>
                   <StatusPill status={p.status} />
@@ -203,23 +210,31 @@ export function Featured({ onOpen }) {
 export function AllProjects({ onOpen }) {
   const { t, L } = useT()
   const [active, setActive] = useState('all')
+  const [query, setQuery] = useState('')
+  const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
 
-  const list = useMemo(() => {
-    if (active === 'all') return projects
-    return projects.filter((p) => (categoryFilters[p.category] || []).includes(active))
-  }, [active])
+  const list = useMemo(() => projects.filter(p => {
+    const categoryMatches = active === 'all' || (categoryFilters[p.category] || []).includes(active)
+    const searchable = [p.name, p.category, ...p.tech, L(p.short)].join(' ')
+    return categoryMatches && normalize(searchable).includes(normalize(query.trim()))
+  }), [active, query, L])
 
   return (
     <section className="section section-tonal" id="projetos">
       <div className="container">
         <SectionHead eyebrow={t.projects.eyebrow} title={t.projects.title} sub={t.projects.aside} />
 
+        <div className="project-tools">
+          <label className="project-search"><span className="sr-only">{t.projects.search}</span><Search size={16} aria-hidden="true" /><input type="search" value={query} onChange={e => setQuery(e.target.value)} placeholder={t.projects.search} /></label>
+          <p className="project-count" role="status">{list.length} / {projects.length} {t.projects.count}</p>
+        </div>
         <div className="filters" role="group" aria-label="Filter">
           {filterTabs.map((f) => (
             <button
               key={f.key}
               type="button"
               className={`filter-button ${active === f.key ? 'active' : ''}`}
+              aria-pressed={active === f.key}
               onClick={() => setActive(f.key)}
             >
               {L(f)}
@@ -227,6 +242,7 @@ export function AllProjects({ onOpen }) {
           ))}
         </div>
 
+        {!list.length && <p className="project-empty">{t.projects.empty}</p>}
         <motion.div layout className="project-grid">
           <AnimatePresence mode="popLayout">
             {list.map((p) => (
@@ -269,11 +285,12 @@ export function AllProjects({ onOpen }) {
 /* ---------------------------------------------------------- Provider (modal) */
 export function ProjectsProvider({ children }) {
   const [selected, setSelected] = useState(null)
+  const close = useCallback(() => setSelected(null), [])
   return (
     <>
       {children({ onOpen: setSelected })}
       <AnimatePresence>
-        {selected && <ProjectModal p={selected} onClose={() => setSelected(null)} />}
+        {selected && <ProjectModal p={selected} onClose={close} />}
       </AnimatePresence>
     </>
   )

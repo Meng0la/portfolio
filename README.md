@@ -1,61 +1,42 @@
-# Portfólio, Gabriel Mengue
+# Gabriel Mengue — Portfólio técnico
 
-Site de portfólio profissional (SPA) com foco em **backend, automação, cibersegurança e infraestrutura**, gerado a partir dos projetos reais do GitHub e da área de trabalho.
+Portfólio bilíngue (PT/EN) que apresenta projetos de manutenção industrial, backend, automação e cibersegurança. Os projetos aparecem antes das seções de formação e tecnologias, com busca por nome/tecnologia, filtros e detalhes de arquitetura.
 
-## Stack
+## Visual e interação
 
-- **React 19** + **Vite 6**
-- **Tailwind CSS 4** (`@tailwindcss/vite`)
-- **Framer Motion** (animações) · **lucide-react** (ícones)
-- Fontes: Inter, Space Grotesk, JetBrains Mono (Google Fonts)
+- Tema escuro com azul e violeta, tipografia DM Sans e IBM Plex Mono.
+- Cubo CSS 3D com seis faces, anéis orbitais, rotação e resposta ao cursor.
+- Controle de pausa e suporte a `prefers-reduced-motion`, inclusive nas transições Framer Motion.
+- Layout responsivo, navegação PT/EN e diálogos com foco contido e restauração ao fechar.
+- Contatos por LinkedIn, GitHub e e-mail. Telefone e link pessoal de WhatsApp removidos da versão atual.
+- Contagens calculadas a partir dos projetos cadastrados; resultados e status continuam baseados no conteúdo existente.
 
-Todo o conteúdo (projetos, stack, competências) vive em **`src/data/content.js`**, é o único arquivo que você precisa editar para atualizar textos, adicionar um projeto ou mudar um status.
+## Desenvolvimento
 
-## Rodar localmente
-
-```bash
-npm install
-npm run dev      # http://localhost:5173
-```
-
-## Build de produção
+Requisitos: Node.js 20.19+ ou 22.12+ e npm.
 
 ```bash
-npm run build    # gera a pasta dist/
-npm run preview  # serve o build para conferência
+npm ci
+npm run dev
+npm run build
+npm run preview
 ```
 
-## Deploy
+Stack: React 19, Vite 6, Tailwind CSS 4, Framer Motion e lucide-react. O cubo usa `perspective` e `transform-style: preserve-3d`, sem dependência de um motor WebGL.
 
-O `vite.config.js` usa `base: ''` (caminhos relativos), então o build funciona em qualquer host estático.
+## Atualizar conteúdo
 
-### GitHub Pages (recomendado, você já tem `meng0la.github.io`)
-1. Crie um repositório `portfolio` (ou use `meng0la.github.io`).
-2. `npm run build`.
-3. Publique o conteúdo de `dist/` na branch `gh-pages`, ou use uma GitHub Action de deploy do Pages.
+- `src/data/content.js`: perfil, projetos, competências, formação e textos PT/EN.
+- `src/components/Hero.jsx`: apresentação e contagens derivadas dos projetos.
+- `src/components/HeroScene.jsx`: ilustração 3D e controles de movimento.
+- `src/components/Projects.jsx`: destaques, busca, filtros e detalhes.
+- `src/index.css`: estilos estruturais.
+- `src/redesign.css`: identidade visual e estilos 3D.
 
-### Cloudflare Pages / Netlify / Vercel
-- Build command: `npm run build`
-- Output directory: `dist`
+Não inclua senhas, tokens ou dados internos nos cases publicados. Os assets de `public/estudo-de-caso/` permanecem como evidências sanitizadas do estudo existente.
 
-## Estrutura
+## Publicação
 
-```
-src/
-  data/content.js       ← conteúdo (projetos, stack, competências, melhorias)
-  components/
-    Nav.jsx             ← navegação fixa + menu mobile
-    Hero.jsx            ← topo com terminal e métricas
-    Sections.jsx        ← Sobre, Tecnologias, Experiência, Contato/Footer
-    Projects.jsx        ← Destaques + Todos (filtro por categoria) + modal
-    ui.jsx              ← componentes utilitários (badges, headings, reveal)
-  App.jsx · main.jsx · index.css
-```
+`npm run build` gera `dist/`. O `base: ''` em `vite.config.js` mantém os caminhos relativos, permitindo publicação em um subdiretório ou domínio próprio.
 
-## Seções
-
-Home (hero) · Sobre · Tecnologias · Projetos em destaque · Todos os projetos (filtráveis) · Experiência técnica · Contato.
-
----
-
-Projetos e informações extraídos dos repositórios de [github.com/Meng0la](https://github.com/Meng0la). Nenhuma experiência ou habilidade foi inventada: onde o repositório não deixava claro, o campo foi omitido.
+O arquivo `deploy.yml.exemplo` é apenas um exemplo de GitHub Actions; não é um workflow ativo. Para publicar por GitHub Pages, configure Pages para usar Actions e adapte o exemplo em `.github/workflows/deploy.yml`. Também é possível publicar `dist/` em Cloudflare Pages, Netlify ou Vercel.
