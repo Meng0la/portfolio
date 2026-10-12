@@ -35,7 +35,7 @@ export function createCyberSculpture(host, controls, onFallback, onReady) {
     if(i%4===0){const panel=mesh(ball,new THREE.PlaneGeometry(.12,.04),neon,p.clone().multiplyScalar(1.004).toArray());panel.lookAt(p.clone().multiplyScalar(2))}
   }
   // A high-detail anatomical holographic hand cutout replaces primitive robot geometry.
-  const hand = new THREE.Group(); hand.position.set(0,-.88,.76); root.add(hand)
+  const hand = new THREE.Group(); hand.position.set(0,-.82,-1.04); root.add(hand)
   let handTexture, alive=true
   const handMaterial = new THREE.MeshBasicMaterial({ transparent:true, depthWrite:false, side:THREE.DoubleSide, toneMapped:false })
   const handPlane=mesh(hand,new THREE.PlaneGeometry(2.75,1.72),handMaterial,[0,0,0])
@@ -54,7 +54,7 @@ export function createCyberSculpture(host, controls, onFallback, onReady) {
     const dt=previous?Math.min((now-previous)/1000,.05):0;previous=now
     if(!visible||document.hidden)return
     if(!controls.current.paused){elapsed+=dt;ball.rotation.y=elapsed*.26;ball.rotation.z=Math.sin(elapsed*.25)*.025;
-      const lift=Math.sin(elapsed*.85)*.022;ball.position.y=.42+lift;hand.position.y=-.88+lift;hand.rotation.z=Math.sin(elapsed*.65)*.012
+      const lift=Math.sin(elapsed*.85)*.022;ball.position.y=.42+lift;hand.position.y=-.82+lift;hand.rotation.z=Math.sin(elapsed*.65)*.012
       motes.children.forEach((p,i)=>p.position.y=p.userData.baseY+Math.sin(elapsed*.5+i)*.05)
     }
     root.rotation.y+=(controls.current.x*.22-root.rotation.y)*.05

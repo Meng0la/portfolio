@@ -28,7 +28,6 @@ export default function CanvasCyberGlobe({ paused }) {
           ctx.beginPath();ps.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.strokeStyle=`rgba(102,213,255,${.11+Math.max(0,z)*.39})`;ctx.lineWidth=.65;ctx.stroke()
         }
         projected.forEach((p,i)=>{if(p.z<.15||i%3)return;ctx.beginPath();ctx.arc(p.x,p.y,1+Math.max(0,p.z)*.9,0,Math.PI*2);ctx.fillStyle=`rgba(158,237,255,${p.z*.75})`;ctx.fill()})
-        const shieldX=cx+Math.sin(angle)*r*.57,shieldZ=Math.cos(angle);if(shieldZ>.1){ctx.save();ctx.translate(shieldX,cy);ctx.scale(shieldZ,1);ctx.beginPath();ctx.moveTo(0,-28);ctx.lineTo(23,-19);ctx.lineTo(21,8);ctx.quadraticCurveTo(15,24,0,33);ctx.quadraticCurveTo(-15,24,-21,8);ctx.lineTo(-23,-19);ctx.closePath();ctx.fillStyle='rgba(10,31,69,.88)';ctx.fill();ctx.strokeStyle='#96e6ff';ctx.lineWidth=1.8;ctx.stroke();ctx.strokeRect(-7,-2,14,13);ctx.beginPath();ctx.arc(0,-3,6,Math.PI,0);ctx.stroke();ctx.restore()}
         ctx.restore();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(130,205,255,.55)';ctx.lineWidth=1;ctx.stroke()
       }
       raf=requestAnimationFrame(draw)

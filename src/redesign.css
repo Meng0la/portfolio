@@ -16,3 +16,6 @@ body{background:var(--bg)}:focus-visible{outline:2px solid #b7a0ff;outline-offse
 
 /* A consistent anatomical composition on mobile and when WebGL is unavailable. */
 .uses-software .sculpture-canvas{visibility:hidden}.anatomical-scene{position:absolute;inset:35px 0 45px;display:grid;place-items:center;animation:cradleBreath 8s ease-in-out infinite}.software-globe{position:absolute;width:270px;height:270px;top:0;left:calc(50% - 135px);z-index:1}.anatomical-hand{position:absolute;width:330px;max-width:94%;height:auto;left:50%;transform:translateX(-50%);top:200px;z-index:2;filter:drop-shadow(0 0 16px #2b84d42a)}.is-paused .anatomical-scene{animation-play-state:paused}@keyframes cradleBreath{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}@media(max-width:580px){.anatomical-scene{inset:30px 0 40px}.software-globe{width:235px;height:235px;left:calc(50% - 117.5px);top:0}.anatomical-hand{width:300px;top:167px}.cyber-sculpture .scene-coordinates{font-size:8px;left:6px;right:6px}.scene-bottom{font-size:8px}}
+
+/* Place the globe in front of the cupped palm, not behind the fingertips. */
+.anatomical-scene .software-globe{z-index:3;top:30px}.anatomical-scene .anatomical-hand{z-index:2;top:195px}@media(max-width:580px){.anatomical-scene .software-globe{top:27px}.anatomical-scene .anatomical-hand{top:165px}}
