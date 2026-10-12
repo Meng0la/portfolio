@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import { Pause, Play } from 'lucide-react'
 import { useT } from '../i18n'
@@ -7,41 +7,29 @@ export default function HeroScene() {
   const { lang } = useT()
   const reduced = useReducedMotion()
   const [paused, setPaused] = useState(false)
-  const scene = useRef(null)
+  const [fallback, setFallback] = useState(false)
+  const host = useRef(null)
+  const controls = useRef({ paused: true, x: 0, y: 0 })
   const pt = lang === 'pt'
-  const follow = (event) => {
-    if (reduced || paused || event.pointerType !== 'mouse') return
-    const box = event.currentTarget.getBoundingClientRect()
-    scene.current.style.setProperty('--pointer-y', `${((event.clientX - box.left) / box.width - .5) * 24}deg`)
-    scene.current.style.setProperty('--pointer-x', `${-((event.clientY - box.top) / box.height - .5) * 18}deg`)
-  }
-  const reset = () => {
-    scene.current?.style.setProperty('--pointer-y', '0deg')
-    scene.current?.style.setProperty('--pointer-x', '0deg')
+  useEffect(()=>{controls.current.paused=paused||!!reduced;if(paused||reduced){controls.current.x=0;controls.current.y=0}},[paused,reduced])
+  useEffect(()=>{
+    let cancelled=false,cleanup
+    import('./CyberSculpture').then(({createCyberSculpture})=>{if(!cancelled)cleanup=createCyberSculpture(host.current,controls,()=>setFallback(true))}).catch(()=>{if(!cancelled)setFallback(true)})
+    return ()=>{cancelled=true;cleanup?.()}
+  },[])
+  const follow=event=>{
+    if(reduced||paused||event.pointerType!=='mouse')return
+    const box=event.currentTarget.getBoundingClientRect();controls.current.x=(event.clientX-box.left)/box.width-.5;controls.current.y=(event.clientY-box.top)/box.height-.5
   }
   return (
-    <div className={`hero-scene ${paused || reduced ? 'is-paused' : ''}`} ref={scene} onPointerMove={follow} onPointerLeave={reset}>
+    <div className={`hero-scene cyber-sculpture ${paused||reduced?'is-paused':''}`} onPointerMove={follow} onPointerLeave={()=>{controls.current.x=0;controls.current.y=0}}>
       <div className="scene-grid" aria-hidden="true" />
-      <div className="scene-coordinates" aria-hidden="true"><span>GM / SYSTEM CORE</span><span>01 — 03</span></div>
-      <div className="scene-camera" aria-hidden="true"><div className="scene-parallax">
-        <div className="core-orbit orbit-one" /><div className="core-orbit orbit-two" />
-        <div className="core-float"><div className="core-cube">
-          <div className="cube-face face-front"><span className="cube-glyph">GM<span>ENGINEERED TO CONNECT</span></span></div>
-          <div className="cube-face face-back"><span className="cube-glyph">{'</>'}</span></div>
-          <div className="cube-face face-right"><span className="cube-glyph">{'{}'}<span>BUILD / AUTOMATE</span></span></div>
-          <div className="cube-face face-left"><span className="cube-glyph">01<span>SECURE / EVOLVE</span></span></div>
-          <div className="cube-face face-top"><span className="cube-chip" /></div>
-          <div className="cube-face face-bottom"><span className="cube-chip" /></div>
-        </div></div>
-      </div></div>
-      <div className="scene-shadow" aria-hidden="true" />
-      <span className="scene-label label-backend" aria-hidden="true"><i /> BACKEND</span>
-      <span className="scene-label label-security" aria-hidden="true"><i /> SECURITY</span>
-      <span className="scene-label label-automation" aria-hidden="true"><i /> AUTOMATION</span>
-      <p className="sr-only">{pt ? 'Cubo tridimensional com seis faces, anéis orbitais e as iniciais GM.' : 'Three-dimensional cube with six faces, orbital rings and the initials GM.'}</p>
-      <div className="scene-bottom"><span>{pt ? 'Mova o cursor para explorar' : 'Move your cursor to explore'}</span><button type="button" disabled={!!reduced} aria-pressed={paused || !!reduced} onClick={() => { reset(); setPaused(!paused) }}>
-        {paused || reduced ? <Play size={13} /> : <Pause size={13} />}
-        {reduced ? (pt ? 'Movimento reduzido' : 'Reduced motion') : paused ? (pt ? 'Retomar' : 'Resume') : (pt ? 'Pausar' : 'Pause')}
+      <div className="scene-coordinates" aria-hidden="true"><span>GM / CYBER CORE</span><span>WEBGL / 3D</span></div>
+      <div className="sculpture-canvas" ref={host} />
+      {fallback&&<div className="sculpture-fallback" aria-hidden="true"><div className="fallback-sphere"/><svg viewBox="0 0 260 180"><path d="M92 180 94 133C57 114 31 99 26 88c-4-11 8-16 18-9l53 24-30-69c-5-13 9-20 17-6l31 51-10-61c-2-16 15-19 19-3l17 65 8-56c2-16 20-14 19 1l-5 62 14-36c6-15 22-9 17 5l-21 74-12 50Z"/></svg></div>}
+      <p className="sr-only">{pt?'Esfera cyber tridimensional girando sobre uma mão robótica articulada e animada.':'A three-dimensional cyber sphere rotating above an animated articulated robotic hand.'}</p>
+      <div className="scene-bottom"><span>{pt?'Mova o cursor para explorar':'Move your cursor to explore'}</span><button type="button" disabled={!!reduced} aria-pressed={paused||!!reduced} onClick={()=>setPaused(!paused)}>
+        {paused||reduced?<Play size={13}/>:<Pause size={13}/>}{reduced?(pt?'Movimento reduzido':'Reduced motion'):paused?(pt?'Retomar':'Resume'):(pt?'Pausar':'Pause')}
       </button></div>
     </div>
   )
